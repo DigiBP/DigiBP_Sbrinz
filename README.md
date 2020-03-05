@@ -5,6 +5,9 @@
 
 ## Releases
 
+### 4.0.0
+- Test-Version made by Dejan.
+
 ### [3.4.0](https://github.com/DigiBP/digibp-camunda-template/tree/3.4.0)
 - Updating Camunda to 7.12.0
 - Updating Camunda Spring Boot to 3.4.0

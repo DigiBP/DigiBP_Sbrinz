@@ -18,7 +18,6 @@ I want to upload a scientific paper at IEEE
 I would like to publish my papers at the IEEE
 
 
-
 ReceiveID Intent
 ================
 this is the id aaabbbcccddde
@@ -47,7 +46,7 @@ goodbye
 see you
 
 
-Default welcome Intent
+Default Welcome Intent
 ======================
 Hi
 Hii

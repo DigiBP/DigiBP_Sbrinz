@@ -1,0 +1,79 @@
+UploadPaper
+===========
+
+I am interestend in publishing a paper at IEEE
+I am interested in publishing a scientific paper
+I want to publish a scientific article
+I would like to upload my paper to a scientific conference
+I am writing a paper which I would like to present at AMCIS
+I am working on a research paper which i want to publish at ICIS
+I am writing a paper which I want to present at ICIS
+I want to present my paper at the IEEE
+I want to present my paper at the ACM
+I wanna publish my paper at the Institute of Electrical and Electronics Engineers
+I want to upload a research paper
+I want to upload a paper
+I would like to publish my research paper at ECIS
+I want to publish my paper at IEEE
+I want to upload a scientific paper at IEEE
+I would like to publish my papers at the IEEE
+
+
+
+ReceiveID
+=========
+
+this is the id aaabbbcccddde
+i got this id: 5eb3baf1c9b88
+5eb32d7ed53e9 is my id
+this is my ID 5eb3ccb17d8f1
+I got the following ID 5eb3ccb17d8f1
+This is my ID: 5eb32dbf9657e
+I received the ID 5eb32d7ed53e9
+My ID is 5eb32dbf9657e
+I uploaded my paper. This is my ID 5eb3baf1c9b88
+I uploaded the article. the ID i received is 5eb4cab27d5f1
+
+
+Goodbye
+=======
+
+See ya
+See u
+C U 
+Ciao
+Bye
+Byee
+bye bye
+Good bye
+goodbye
+see you
+
+
+Default welcome Intent
+======================
+Hi
+Hii
+Hiii
+Aloha
+Heya
+Hello
+Howdy
+Hi there
+Hey there
+Hey
+...
+
+
+Default Fallback Intent
+=======================
+I didn't get that. Can you say it again?
+I missed what you said. What was that?
+Sorry, could you say that again?
+Sorry, can you say that again?
+Can you say that again?
+Sorry, I didn't get that. Can you rephrase?
+Sorry, what was that?
+One more time?
+What was that?
+...

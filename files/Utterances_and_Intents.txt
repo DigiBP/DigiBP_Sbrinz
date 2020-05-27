@@ -1,5 +1,5 @@
-UploadPaper
-===========
+UploadPaper Intent
+==================
 I am interestend in publishing a paper at IEEE
 I am interested in publishing a scientific paper
 I want to publish a scientific article
@@ -19,8 +19,8 @@ I would like to publish my papers at the IEEE
 
 
 
-ReceiveID
-=========
+ReceiveID Intent
+================
 this is the id aaabbbcccddde
 i got this id: 5eb3baf1c9b88
 5eb32d7ed53e9 is my id
@@ -33,8 +33,8 @@ I uploaded my paper. This is my ID 5eb3baf1c9b88
 I uploaded the article. the ID i received is 5eb4cab27d5f1
 
 
-Goodbye
-=======
+Goodbye Intent
+==============
 See ya
 See u
 C U 

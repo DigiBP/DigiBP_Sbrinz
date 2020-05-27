@@ -1,0 +1,17 @@
+{
+  "isRegexp": true,
+  "isEnum": false,
+  "allowFuzzyExtraction": false,
+  "name": "ID",
+  "automatedExpansion": false,
+  "entries": [
+    {
+      "value": "[a-f0-9]{13}",
+      "synonyms": [
+        "[a-f0-9]{13}"
+      ]
+    }
+  ],
+  "id": "8976f63d-82b8-4e8d-bb4a-95e1fd15fe59",
+  "isOverridable": false
+}

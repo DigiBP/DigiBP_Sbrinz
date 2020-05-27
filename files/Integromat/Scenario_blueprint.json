@@ -1,0 +1,778 @@
+{
+    "name": "Integration Webhooks, MySQL, Camunda",
+    "flow": [
+        {
+            "id": 1,
+            "module": "gateway:CustomWebHook",
+            "version": 1,
+            "parameters": {
+                "hook": 385164,
+                "maxResults": 2
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": -201,
+                    "y": 148
+                },
+                "restore": {
+                    "hook": {
+                        "label": "send-email"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "hook",
+                        "type": "hook",
+                        "label": "Webhook",
+                        "required": true
+                    },
+                    {
+                        "name": "maxResults",
+                        "type": "number",
+                        "label": "Maximum number of results"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "responseId",
+                        "type": "text"
+                    },
+                    {
+                        "name": "queryResult",
+                        "spec": [
+                            {
+                                "name": "queryText",
+                                "type": "text"
+                            },
+                            {
+                                "name": "parameters",
+                                "spec": [
+                                    {
+                                        "name": "ID",
+                                        "type": "text"
+                                    }
+                                ],
+                                "type": "collection"
+                            },
+                            {
+                                "name": "allRequiredParamsPresent",
+                                "type": "boolean"
+                            },
+                            {
+                                "name": "fulfillmentText",
+                                "type": "text"
+                            },
+                            {
+                                "name": "fulfillmentMessages",
+                                "spec": {
+                                    "spec": [
+                                        {
+                                            "name": "text",
+                                            "spec": [
+                                                {
+                                                    "name": "text",
+                                                    "spec": {
+                                                        "type": "text"
+                                                    },
+                                                    "type": "array"
+                                                }
+                                            ],
+                                            "type": "collection"
+                                        }
+                                    ],
+                                    "type": "collection"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "name": "outputContexts",
+                                "spec": {
+                                    "spec": [
+                                        {
+                                            "name": "name",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "name": "parameters",
+                                            "spec": [
+                                                {
+                                                    "name": "no-input",
+                                                    "type": "number"
+                                                },
+                                                {
+                                                    "name": "no-match",
+                                                    "type": "number"
+                                                },
+                                                {
+                                                    "name": "ID",
+                                                    "type": "text"
+                                                },
+                                                {
+                                                    "name": "ID.original",
+                                                    "type": "text"
+                                                }
+                                            ],
+                                            "type": "collection"
+                                        }
+                                    ],
+                                    "type": "collection"
+                                },
+                                "type": "array"
+                            },
+                            {
+                                "name": "intent",
+                                "spec": [
+                                    {
+                                        "name": "name",
+                                        "type": "text"
+                                    },
+                                    {
+                                        "name": "displayName",
+                                        "type": "text"
+                                    }
+                                ],
+                                "type": "collection"
+                            },
+                            {
+                                "name": "intentDetectionConfidence",
+                                "type": "number"
+                            },
+                            {
+                                "name": "languageCode",
+                                "type": "text"
+                            }
+                        ],
+                        "type": "collection"
+                    },
+                    {
+                        "name": "originalDetectIntentRequest",
+                        "spec": [
+                            {
+                                "name": "payload",
+                                "spec": [],
+                                "type": "collection"
+                            }
+                        ],
+                        "type": "collection"
+                    },
+                    {
+                        "name": "session",
+                        "type": "text"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 2,
+            "module": "mysql:SelectFromTable",
+            "version": 2,
+            "parameters": {
+                "table": "`idoxitaf_sbrinz`.`author_information`",
+                "account": 1192795,
+                "continueWhenNoRes": false
+            },
+            "mapper": {
+                "sort": [],
+                "limit": "1",
+                "where": [
+                    [
+                        {
+                            "a": "created_id",
+                            "b": "{{1.queryResult.parameters.ID}}",
+                            "o": "equal"
+                        }
+                    ]
+                ]
+            },
+            "metadata": {
+                "designer": {
+                    "x": 99,
+                    "y": 148
+                },
+                "restore": {
+                    "sort": {
+                        "items": []
+                    },
+                    "table": {
+                        "label": "idoxitaf_sbrinz.author_information"
+                    },
+                    "account": {
+                        "label": "My MySQL connection"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "account",
+                        "type": "account",
+                        "label": "Connection",
+                        "required": true
+                    },
+                    {
+                        "name": "continueWhenNoRes",
+                        "type": "boolean",
+                        "label": "Continue the execution of the route even if the module returns no rows",
+                        "required": true
+                    },
+                    {
+                        "name": "table",
+                        "type": "select",
+                        "label": "Table",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "where",
+                        "type": "filter",
+                        "label": "Filter",
+                        "options": {
+                            "store": "rpc://mysql@2.8.2/columns?_type=options",
+                            "operators": [
+                                {
+                                    "label": "Basic",
+                                    "options": [
+                                        {
+                                            "label": "Is not null",
+                                            "value": "exist"
+                                        },
+                                        {
+                                            "label": "Is null",
+                                            "value": "notexist"
+                                        },
+                                        {
+                                            "label": "Equal to",
+                                            "value": "equal"
+                                        },
+                                        {
+                                            "label": "Not equal to",
+                                            "value": "notequal"
+                                        },
+                                        {
+                                            "label": "Greater than",
+                                            "value": "greater"
+                                        },
+                                        {
+                                            "label": "Greater than or equal to",
+                                            "value": "greaterorequal"
+                                        },
+                                        {
+                                            "label": "Less than",
+                                            "value": "less"
+                                        },
+                                        {
+                                            "label": "Less than or equal to",
+                                            "value": "lessorequal"
+                                        },
+                                        {
+                                            "label": "Contains",
+                                            "value": "contain"
+                                        },
+                                        {
+                                            "label": "Does not contain",
+                                            "value": "notcontain"
+                                        },
+                                        {
+                                            "label": "Starts with",
+                                            "value": "startwith"
+                                        },
+                                        {
+                                            "label": "Does not start with",
+                                            "value": "notstartwith"
+                                        },
+                                        {
+                                            "label": "Ends with",
+                                            "value": "endwith"
+                                        },
+                                        {
+                                            "label": "Does not end with",
+                                            "value": "notendwith"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "spec": [
+                            {
+                                "name": "column",
+                                "type": "select",
+                                "label": "Column",
+                                "required": true
+                            },
+                            {
+                                "name": "order",
+                                "type": "select",
+                                "label": "Order",
+                                "options": [
+                                    {
+                                        "label": "Ascending",
+                                        "value": "asc"
+                                    },
+                                    {
+                                        "label": "Descending",
+                                        "value": "desc"
+                                    }
+                                ],
+                                "required": true
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Sort"
+                    },
+                    {
+                        "name": "limit",
+                        "type": "uinteger",
+                        "label": "Limit"
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "__IMTLENGTH__",
+                        "type": "uinteger",
+                        "label": "Total number of bundles"
+                    },
+                    {
+                        "name": "__IMTINDEX__",
+                        "type": "uinteger",
+                        "label": "Bundle order position"
+                    },
+                    {
+                        "name": "id",
+                        "type": "integer",
+                        "label": "id",
+                        "required": false
+                    },
+                    {
+                        "name": "created_id",
+                        "type": "text",
+                        "label": "created_id",
+                        "required": false
+                    },
+                    {
+                        "name": "firstname",
+                        "type": "text",
+                        "label": "firstname",
+                        "required": false
+                    },
+                    {
+                        "name": "lastname",
+                        "type": "text",
+                        "label": "lastname",
+                        "required": false
+                    },
+                    {
+                        "name": "conference",
+                        "type": "text",
+                        "label": "conference",
+                        "required": false
+                    },
+                    {
+                        "name": "content",
+                        "type": "text",
+                        "label": "content",
+                        "required": false
+                    },
+                    {
+                        "name": "created_timestamp",
+                        "type": "date",
+                        "label": "created_timestamp",
+                        "required": false
+                    }
+                ]
+            }
+        },
+        {
+            "id": 3,
+            "module": "google-email:ActionSendEmail",
+            "version": 1,
+            "parameters": {
+                "account": 1192757
+            },
+            "mapper": {
+                "cc": [],
+                "to": [
+                    "dejan.trifunovic@students.fhnw.ch"
+                ],
+                "bcc": [],
+                "from": "",
+                "html": "Hi there <br/><br/> \n\nA user just uploaded his article for correction. Please take a look and give a feedback in Camunda.<br/><br/>\n\n<b>NAME</b><br/>{{2.firstname}} {{2.lastname}}\n<br/><br/>\n\n<b>ID</b><br/>{{1.queryResult.parameters.ID}}\n<br/><br/>\n<b>CONTENT</b><br/>{{2.content}}\n\n<br/><br/>\nBest regards<br/>\nChatbot Nikki",
+                "subject": "A new research paper was uploaded",
+                "attachments": []
+            },
+            "metadata": {
+                "designer": {
+                    "x": 399,
+                    "y": 148
+                },
+                "restore": {
+                    "cc": {
+                        "mode": "chose",
+                        "items": []
+                    },
+                    "to": {
+                        "mode": "chose",
+                        "items": [
+                            "undefined"
+                        ]
+                    },
+                    "bcc": {
+                        "mode": "chose",
+                        "items": []
+                    },
+                    "account": {
+                        "label": "send-email (demouser4digibp@gmail.com)"
+                    },
+                    "attachments": {
+                        "mode": "chose",
+                        "items": []
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "account",
+                        "type": "account",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "from",
+                        "type": "text",
+                        "label": "From"
+                    },
+                    {
+                        "name": "to",
+                        "spec": {
+                            "name": " ",
+                            "type": "email",
+                            "label": "Email address",
+                            "required": true
+                        },
+                        "type": "array",
+                        "label": "To",
+                        "labels": {
+                            "add": "Add a recipient",
+                            "edit": "Edit a recipient"
+                        },
+                        "required": true
+                    },
+                    {
+                        "name": "subject",
+                        "type": "text",
+                        "label": "Subject"
+                    },
+                    {
+                        "name": "html",
+                        "type": "text",
+                        "label": "Content"
+                    },
+                    {
+                        "name": "attachments",
+                        "spec": [
+                            {
+                                "name": "fileName",
+                                "type": "filename",
+                                "label": "File name",
+                                "required": true,
+                                "semantic": "file:name"
+                            },
+                            {
+                                "name": "data",
+                                "type": "buffer",
+                                "label": "Data",
+                                "required": true,
+                                "semantic": "file:data"
+                            },
+                            {
+                                "name": "cid",
+                                "type": "text",
+                                "label": "Content-ID"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Attachments",
+                        "labels": {
+                            "add": "Add an attachment",
+                            "edit": "Edit an attachment"
+                        }
+                    },
+                    {
+                        "name": "cc",
+                        "spec": {
+                            "type": "email",
+                            "label": "Email address"
+                        },
+                        "type": "array",
+                        "label": "Copy recipient",
+                        "labels": {
+                            "add": "Add a copy recipient",
+                            "edit": "Edit a copy recipient"
+                        }
+                    },
+                    {
+                        "name": "bcc",
+                        "spec": {
+                            "type": "email",
+                            "label": "Email address"
+                        },
+                        "type": "array",
+                        "label": "Blind copy recipient",
+                        "labels": {
+                            "add": "Add a blind copy recipient",
+                            "edit": "Edit a blind copy recipient"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": 4,
+            "module": "http:ActionSendData",
+            "version": 3,
+            "parameters": {
+                "handleErrors": false
+            },
+            "mapper": {
+                "ca": "",
+                "qs": [],
+                "url": "https://digibp-sbrinz.herokuapp.com/rest/message",
+                "data": "{\"messageName\" : \"MessageFromIntegromat\",\"processVariables\" : {    \n\"authorName\" : {\"value\" : \"{{2.firstname}} {{2.lastname}}\", \"type\": \"String\"},    \n\"authorArticle\" : {\"value\" : \"{{2.content}}\", \"type\": \"String\"},\n\"authorID\" : {\"value\" : \"{{2.created_id}}\", \"type\": \"String\"} \n}\n}",
+                "gzip": true,
+                "method": "post",
+                "headers": [],
+                "timeout": "",
+                "authPass": "",
+                "authUser": "",
+                "bodyType": "raw",
+                "contentType": "application/json",
+                "shareCookies": false,
+                "parseResponse": false,
+                "followRedirect": true,
+                "useQuerystring": false,
+                "followAllRedirects": false,
+                "rejectUnauthorized": true
+            },
+            "metadata": {
+                "designer": {
+                    "x": 699,
+                    "y": 148
+                },
+                "restore": {
+                    "qs": {
+                        "mode": "chose",
+                        "items": []
+                    },
+                    "method": {
+                        "mode": "chose",
+                        "label": "POST"
+                    },
+                    "headers": {
+                        "mode": "chose",
+                        "items": []
+                    },
+                    "bodyType": {
+                        "label": "Raw"
+                    },
+                    "contentType": {
+                        "label": "JSON (application/json)"
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "handleErrors",
+                        "type": "boolean",
+                        "label": "Evaluate all states as errors (except for 2xx and 3xx )",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "url",
+                        "type": "url",
+                        "label": "URL",
+                        "required": true
+                    },
+                    {
+                        "name": "method",
+                        "type": "select",
+                        "label": "Method",
+                        "required": true,
+                        "validate": {
+                            "enum": [
+                                "get",
+                                "head",
+                                "post",
+                                "put",
+                                "patch",
+                                "delete"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "headers",
+                        "spec": [
+                            {
+                                "name": "name",
+                                "type": "text",
+                                "label": "Name",
+                                "required": true
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Headers",
+                        "labels": {
+                            "add": "Add a header",
+                            "edit": "Edit a header"
+                        }
+                    },
+                    {
+                        "name": "qs",
+                        "spec": [
+                            {
+                                "name": "name",
+                                "type": "text",
+                                "label": "Name",
+                                "required": true
+                            },
+                            {
+                                "name": "value",
+                                "type": "text",
+                                "label": "Value"
+                            }
+                        ],
+                        "type": "array",
+                        "label": "Query String",
+                        "labels": {
+                            "add": "Add parameter",
+                            "edit": "Edit parameter"
+                        }
+                    },
+                    {
+                        "name": "bodyType",
+                        "type": "select",
+                        "label": "Body type",
+                        "validate": {
+                            "enum": [
+                                "raw",
+                                "x_www_form_urlencoded",
+                                "multipart_form_data"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "parseResponse",
+                        "type": "boolean",
+                        "label": "Parse response",
+                        "required": true
+                    },
+                    {
+                        "name": "authUser",
+                        "type": "text",
+                        "label": "User name"
+                    },
+                    {
+                        "name": "authPass",
+                        "type": "password",
+                        "label": "Password"
+                    },
+                    {
+                        "name": "timeout",
+                        "type": "uinteger",
+                        "label": "Timeout",
+                        "validate": {
+                            "max": 300,
+                            "min": 1
+                        }
+                    },
+                    {
+                        "name": "shareCookies",
+                        "type": "boolean",
+                        "label": "Share cookies with other HTTP modules",
+                        "required": true
+                    },
+                    {
+                        "name": "ca",
+                        "type": "cert",
+                        "label": "Self-signed certificate",
+                        "multiline": true
+                    },
+                    {
+                        "name": "rejectUnauthorized",
+                        "type": "boolean",
+                        "label": "Reject connections that are using unverified (self-signed) certificates",
+                        "required": true
+                    },
+                    {
+                        "name": "followRedirect",
+                        "type": "boolean",
+                        "label": "Follow redirect",
+                        "required": true
+                    },
+                    {
+                        "name": "useQuerystring",
+                        "type": "boolean",
+                        "label": "Disable serialization of multiple same query string keys as arrays",
+                        "required": true
+                    },
+                    {
+                        "name": "gzip",
+                        "type": "boolean",
+                        "label": "Request compressed content",
+                        "required": true
+                    },
+                    {
+                        "name": "contentType",
+                        "type": "select",
+                        "label": "Content type",
+                        "validate": {
+                            "enum": [
+                                "text/plain",
+                                "application/json",
+                                "application/xml",
+                                "text/xml",
+                                "text/html",
+                                "custom"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "data",
+                        "type": "buffer",
+                        "label": "Request content"
+                    },
+                    {
+                        "name": "followAllRedirects",
+                        "type": "boolean",
+                        "label": "Follow all redirect",
+                        "required": true
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": false,
+            "sequential": false,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu1.integromat.com"
+    }
+}

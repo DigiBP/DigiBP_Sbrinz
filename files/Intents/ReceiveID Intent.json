@@ -1,0 +1,235 @@
+{
+  "id": "374da09e-a491-4919-bbcf-973ddf6c7495",
+  "name": "ReceiveID Intent",
+  "auto": true,
+  "condition": "",
+  "conditionalFollowupEvents": [],
+  "conditionalResponses": [],
+  "context": [],
+  "contexts": [],
+  "endInteraction": false,
+  "events": [],
+  "fallbackIntent": false,
+  "liveAgentHandoff": false,
+  "parentId": null,
+  "followUpIntents": [],
+  "priority": 500000,
+  "responses": [
+    {
+      "action": "",
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "noInputPromptMessages": [],
+          "noMatchPromptMessages": [],
+          "promptMessages": [],
+          "defaultValue": "",
+          "name": "ID",
+          "dataType": "@ID",
+          "isList": false,
+          "required": true,
+          "prompts": [],
+          "value": "$ID",
+          "outputDialogContexts": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "messages": [
+        {
+          "type": "message",
+          "condition": "",
+          "speech": [
+            "Thank you so much. You will be contacted by the appropriate department. Good luck with your paper :)"
+          ]
+        }
+      ],
+      "resetContexts": false
+    }
+  ],
+  "rootParentId": null,
+  "templates": [],
+  "userSays": [
+    {
+      "isTemplate": false,
+      "data": [
+        {
+          "text": "I uploaded the article. the ID i received is ",
+          "userDefined": false
+        },
+        {
+          "text": "5eb4cab27d5f1",
+          "userDefined": true,
+          "alias": "ID",
+          "meta": "@ID"
+        }
+      ],
+      "count": 0,
+      "id": null,
+      "updated": null
+    },
+    {
+      "isTemplate": false,
+      "data": [
+        {
+          "text": "this is the id ",
+          "userDefined": false
+        },
+        {
+          "text": "aaabbbcccddde",
+          "userDefined": false,
+          "alias": "ID",
+          "meta": "@ID"
+        }
+      ],
+      "count": 0,
+      "id": null,
+      "updated": null
+    },
+    {
+      "isTemplate": false,
+      "data": [
+        {
+          "text": "i got this id: ",
+          "userDefined": false
+        },
+        {
+          "text": "5eb3baf1c9b88",
+          "userDefined": true,
+          "alias": "ID",
+          "meta": "@ID"
+        }
+      ],
+      "count": 0,
+      "id": null,
+      "updated": null
+    },
+    {
+      "isTemplate": false,
+      "data": [
+        {
+          "text": "5eb32d7ed53e9",
+          "userDefined": true,
+          "alias": "ID",
+          "meta": "@ID"
+        },
+        {
+          "text": " is my id",
+          "userDefined": false
+        }
+      ],
+      "count": 0,
+      "id": null,
+      "updated": null
+    },
+    {
+      "isTemplate": false,
+      "data": [
+        {
+          "text": "this is my ID ",
+          "userDefined": false
+        },
+        {
+          "text": "5eb3ccb17d8f1",
+          "userDefined": true,
+          "alias": "ID",
+          "meta": "@ID"
+        }
+      ],
+      "count": 0,
+      "id": null,
+      "updated": null
+    },
+    {
+      "isTemplate": false,
+      "data": [
+        {
+          "text": "I got the following ID ",
+          "userDefined": false
+        },
+        {
+          "text": "5eb3ccb17d8f1",
+          "userDefined": true,
+          "alias": "ID",
+          "meta": "@ID"
+        }
+      ],
+      "count": 0,
+      "id": null,
+      "updated": null
+    },
+    {
+      "isTemplate": false,
+      "data": [
+        {
+          "text": "This is my ID: ",
+          "userDefined": false
+        },
+        {
+          "text": "5eb32dbf9657e",
+          "userDefined": true,
+          "alias": "ID",
+          "meta": "@ID"
+        }
+      ],
+      "count": 1,
+      "id": null,
+      "updated": null
+    },
+    {
+      "isTemplate": false,
+      "data": [
+        {
+          "text": "I received the ID ",
+          "userDefined": false
+        },
+        {
+          "text": "5eb32d7ed53e9",
+          "userDefined": true,
+          "alias": "ID",
+          "meta": "@ID"
+        }
+      ],
+      "count": 0,
+      "id": null,
+      "updated": null
+    },
+    {
+      "isTemplate": false,
+      "data": [
+        {
+          "text": "My ID is ",
+          "userDefined": false
+        },
+        {
+          "text": "5eb32dbf9657e",
+          "userDefined": true,
+          "alias": "ID",
+          "meta": "@ID"
+        }
+      ],
+      "count": 1,
+      "id": null,
+      "updated": null
+    },
+    {
+      "isTemplate": false,
+      "data": [
+        {
+          "text": "I uploaded my paper. This is my ID ",
+          "userDefined": false
+        },
+        {
+          "text": "5eb3baf1c9b88",
+          "userDefined": true,
+          "alias": "ID",
+          "meta": "@ID"
+        }
+      ],
+      "count": 0,
+      "id": null,
+      "updated": null
+    }
+  ],
+  "webhookForSlotFilling": false,
+  "webhookUsed": true
+}

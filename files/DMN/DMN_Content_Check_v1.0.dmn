@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/1.0" id="Definitions_scoreContent" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.7.0">
+  <decision id="Decision_scoreContent" name="Score Content">
+    <extensionElements>
+      <biodi:bounds x="157" y="81" width="180" height="80" />
+    </extensionElements>
+    <decisionTable id="decisionTable_1">
+      <input id="input_1" label="Number of obvious and major mistakes ">
+        <inputExpression id="inputExpression_1" typeRef="integer">
+          <text>numberOfMistakes</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1cngvxg" label="Content complete">
+        <inputExpression id="LiteralExpression_1jsj40z" typeRef="string">
+          <text>contentCompletion</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_0955a40">
+          <text>"yes","no"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_1gg94o7" label="Constant language">
+        <inputExpression id="LiteralExpression_02q9pfx" typeRef="string">
+          <text>constantLanguage</text>
+        </inputExpression>
+        <inputValues id="UnaryTests_1a3ll3m">
+          <text>"yes","no"</text>
+        </inputValues>
+      </input>
+      <output id="output_1" label="Content ok" name="contentStatus" typeRef="boolean" />
+      <output id="OutputClause_1rm8opm" label="Explanation" name="explanation" typeRef="string" />
+      <rule id="DecisionRule_0vew37k">
+        <description></description>
+        <inputEntry id="UnaryTests_0dzt3e1">
+          <text>&lt;= 3</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0xnv3xy">
+          <text>"yes"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_11q2xf3">
+          <text>"yes"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0nh19u6">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1czmt4s">
+          <text>"Content ok"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1e3s2vo">
+        <description></description>
+        <inputEntry id="UnaryTests_1y1nblm">
+          <text>&lt;= 3</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0u652nr">
+          <text>"yes"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ldjm02">
+          <text>"no"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1m9aqho">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0laeehw">
+          <text>"Content not ok. Make sure that consistent language is used."</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0k98q5a">
+        <description></description>
+        <inputEntry id="UnaryTests_1aadkpk">
+          <text>&lt;= 3</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0odaoma">
+          <text>"no"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0rn7psi">
+          <text>"yes"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1s46vs6">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1999z7d">
+          <text>"Content not ok. Make sure that the content is complete."</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0vt5pfd">
+        <description></description>
+        <inputEntry id="UnaryTests_15yba4o">
+          <text>&lt;= 3</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12upvat">
+          <text>"no"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_09hfrwn">
+          <text>"no"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0zyogu2">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1lwwf76">
+          <text>"Content not ok. Make sure that the content is complete and consistent language is used."</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1xih18k">
+        <description></description>
+        <inputEntry id="UnaryTests_0dxpkbt">
+          <text>&gt; 3</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1i57t9k">
+          <text>"no", "yes"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0dau1sk">
+          <text>"no", "yes"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1g9v9zr">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_181yqb7">
+          <text>"Content not ok. Make sure that the major mistakes are corrected."</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>

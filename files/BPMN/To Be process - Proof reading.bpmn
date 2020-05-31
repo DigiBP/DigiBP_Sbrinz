@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_13vmqwc" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.0">
   <bpmn:collaboration id="Collaboration_0081dqz">
-    <bpmn:participant id="Participant_1tigqy3" name="Proof reading process" processRef="ToBe_Process" />
+    <bpmn:participant id="Participant_1tigqy3" name="AI publica" processRef="ToBe_Process" />
   </bpmn:collaboration>
   <bpmn:process id="ToBe_Process" isExecutable="true">
     <bpmn:laneSet id="LaneSet_0a08n3a">
@@ -15,7 +15,7 @@
         <bpmn:flowNodeRef>checkContent</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>getAuthorInformation</bpmn:flowNodeRef>
       </bpmn:lane>
-      <bpmn:lane id="Lane_0f8lrde" name="Proof reading department">
+      <bpmn:lane id="Lane_0f8lrde" name="Proofreading department">
         <bpmn:flowNodeRef>Event_0ofd3cv</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_1jtqzqq</bpmn:flowNodeRef>
       </bpmn:lane>
@@ -163,7 +163,7 @@
     <bpmn:sequenceFlow id="Flow_content_ok" name="yes" sourceRef="contentOK" targetRef="Activity_1jtqzqq">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${contentStatus == true}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:subProcess id="Activity_1jtqzqq" name="Proof reading process">
+    <bpmn:subProcess id="Activity_1jtqzqq" name="Proofreading process">
       <bpmn:incoming>Flow_content_ok</bpmn:incoming>
       <bpmn:outgoing>Flow_1ij17fw</bpmn:outgoing>
       <bpmn:property id="Property_0h5iq97" name="__targetRef_placeholder" />
